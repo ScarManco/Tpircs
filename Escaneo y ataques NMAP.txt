@@ -1,0 +1,52 @@
+Escaneo y ataques con NMAP
+
+-----------Mostrar todas las de IP en una red------------------------------
+arp-scan -I <interfaz de red> --localnet
+
+-----------Escaneo de todos los dispositivos conectados--
+nmap <Direccion de red>/<Prefijo de mascara de subred>
+
+-----------Escaneo de red con ping-----------------------------------------
+nmap -sP <Direccion de red>/<Prefijo de mascara de subred>
+
+-----------Escaneo de dispositivo con info -sV -sC-------------------------
+#un dispositivo
+nmap -sV -sC <ip de victima>
+
+#Todos los dipositivos de una red
+nmap -sV -sC <Direccion de red>/<Prefijo de mascara de subred>
+
+----------Escaneo sigiloso y con info-sS -----------------------------------
+
+#un dispositivo
+nmap -sS -sV -sC <ip de victima>
+
+---------Cambiar Mac en escaneo --spoof-mac --------------------------------
+
+#Un dispositivo
+nmap --spoof-mac <Direccion mac inventada> -sS -sV -sC <ip de victima>
+
+--------Escaneo muy rapido pero ruidoso ------------------------------------
+
+#un dispositivo
+nmap -p- --open -sV -sC --min-rate=5000 -n -vvv <Direccion IP> > <Donde guardar>
+
+
+
+
+
+
+
+
+ATAQUE A PUERTOS TCP CON NMAP >:D
+
+---------ataque de fuerza bruta con Diccionario--------------
+
+nmap --script=ftp-brute --scripts-args userbd=<Lista de usuarios> passwd=<Lista de contraseñas> -p <Puerto> <Direccion IP> 
+
+ ------- Detectar fallos de seguridad------------------------
+ 
+ nmap --script "<vuln o all>" -p <Puerto 445 recomendado> <Direccion IP>
+ 
+ ------- 
+ 

